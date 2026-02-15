@@ -10,32 +10,47 @@ public class Main {
 
         while (isRunning) {
 
-            System.out.println("What would you like to do?");
+            //To-Do: реализовать корректный парсинг команды из терминала
+            //To-Do: реализовать хранение данных в JSON
+            System.out.println("\nWhat would you like to do?");
             System.out.println("-> add (Add a task)");
             System.out.println("-> update (Update a task)");
             System.out.println("-> delete (Delete a task)");
             System.out.println("-> quit (Quit the program)");
-            String decision = sc.next().toUpperCase();
-            sc.nextLine();
-            CommandOptions commandOptions = CommandOptions.valueOf(decision);
 
-            switch (commandOptions) {
-                case ADD -> {
-                    System.out.print("What task would you like to add? -> ");
-                    String description = sc.nextLine();
-                    taskHandler.addTask(description);
-                }
-                case UPDATE -> {
-                    System.out.println("Which task and how would you like to update?");
-                    int id = sc.nextInt() - 1;
-                    //проверить есть ли задание с таким номером!!!!
-                    sc.nextLine();
-                    String newDescription = sc.nextLine();
-                    taskHandler.updateTask(id, newDescription);
+            try {
+                String decision = sc.next().toUpperCase();
+                sc.nextLine();
+                CommandOptions commandOptions = CommandOptions.valueOf(decision);
 
+
+                //To-do: для каждого приема данных проверить InputMismatchException
+                switch (commandOptions) {
+                    case ADD -> {
+                        System.out.print("What task would you like to add? -> ");
+                        String description = sc.nextLine();
+                        taskHandler.addTask(description);
+                    }
+                    case UPDATE -> {
+                        System.out.print("Which task and how would you like to update -> ");
+                        //To-Do: реализовать парсинг id и description из одной строки
+                        int id = sc.nextInt() - 1;
+                        sc.nextLine();
+                        String newDescription = sc.nextLine();
+                        taskHandler.updateTask(id, newDescription);
+
+                    }
+                    case DELETE -> {
+                        System.out.print("Which task would you like to delete? -> ");
+                        int id = sc.nextInt() - 1;
+                        sc.nextLine();
+                        taskHandler.deleteTask(id);
+                    }
+                    case QUIT -> isRunning = false;
+                    default -> System.out.print("Please, select from the options provided -> ");
                 }
-                case QUIT -> isRunning = false;
-                default -> System.out.println("You must select from the options provided!");
+            } catch(IllegalArgumentException e) {
+                System.out.print("Please, select from the options provided!");
             }
         }
 
