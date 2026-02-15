@@ -11,7 +11,6 @@ public class Main {
         while (isRunning) {
 
             //To-Do: реализовать корректный парсинг команды из терминала
-            //To-Do: реализовать хранение данных в JSON
             System.out.println("\nWhat would you like to do?");
             System.out.println("-> add (Add a task)");
             System.out.println("-> update (Update a task)");

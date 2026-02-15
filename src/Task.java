@@ -18,7 +18,7 @@ public class Task {
 
     //ID
     public void setId(int id) {
-        this.id = id + 1; // +1 to start from 1 not 0 because of LinkedList
+        this.id = id + 1; // +1 to start from 1 not 0 because of List
     }
     public int getId() {
         return this.id;
@@ -67,5 +67,12 @@ public class Task {
         System.out.println("Status: " + this.status);
         System.out.println("Created at " + this.getFormattedCreatedAt());
         System.out.println("Updated at " + this.getFormattedUpdatedAt());
+    }
+    public String taskToJson() {
+        //To-do: make fancier later
+        return String.format(
+                "\t{\n\t  \"id\" : %d,\n\t  \"description\": \"%s\",\n\t  \"status\": \"%s\",\n\t  \"createdAt\": \"%s\",\n\t  \"updatedAt\": \"%s\"\n\t}",
+                this.id, this.description, this.status, this.getFormattedCreatedAt(), this.getFormattedUpdatedAt()
+        );
     }
 }
