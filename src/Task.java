@@ -18,7 +18,7 @@ public class Task {
 
     //ID
     public void setId(int id) {
-        this.id = id + 1; // +1 to start from 1 not 0 because of List
+        this.id = id;
     }
     public int getId() {
         return this.id;

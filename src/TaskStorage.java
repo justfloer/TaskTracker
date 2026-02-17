@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TaskStorage {
 
-    private static final String FILE_PATH = "src/tasks.json";
+    private static final String FILE_PATH = "E:\\Java stuff\\TaskTracker\\src\\tasks.json";
 
     //To-do: implement reading from JSON file
 
