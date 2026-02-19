@@ -74,6 +74,36 @@ public class TaskHandler {
         }
     }
 
+    public void listAll() {
+        for(Task task : tasks) {
+            task.printShortTaskInfo();
+        }
+    }
+
+    public void listDone() {
+        for(Task task : tasks) {
+            if(task.getStatus() == TaskStatus.DONE) {
+                task.printShortTaskInfo();
+            }
+        }
+    }
+
+    public void listTodo() {
+        for(Task task : tasks) {
+            if(task.getStatus() == TaskStatus.TODO) {
+                task.printShortTaskInfo();
+            }
+        }
+    }
+
+    public void listInProgress() {
+        for(Task task : tasks) {
+            if(task.getStatus() == TaskStatus.IN_PROGRESS) {
+                task.printShortTaskInfo();
+            }
+        }
+    }
+
     private Task findById(int id) {
 
         for(Task task : tasks) {

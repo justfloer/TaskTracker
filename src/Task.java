@@ -75,4 +75,11 @@ public class Task {
                 this.id, this.description, this.status, this.getFormattedCreatedAt(), this.getFormattedUpdatedAt()
         );
     }
+    public void printShortTaskInfo() {
+        System.out.printf("%s %s(ID: %d)\n",
+                this.status.getGraphicalStatus(),
+                this.description,
+                this.id
+        );
+    }
 }

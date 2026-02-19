@@ -16,12 +16,15 @@ public class Main {
             System.out.println("-> update (Update a task)");
             System.out.println("-> delete (Delete a task)");
             System.out.println("-> mark-in-progress (Mark a task as in progress)");
-            System.out.println("-> mark-done (Marking a task as done)");
+            System.out.println("-> mark-done (Mark a task as done)");
+            System.out.println("-> list (List all tasks)");
+            System.out.println("-> list done (List all done tasks)");
+            System.out.println("-> list todo (List all to-do tasks)");
+            System.out.println("-> list in-progress (List all in-progress tasks)");
             System.out.println("-> quit (Quit the program)");
 
             try {
-                String decision = sc.next();
-                sc.nextLine();
+                String decision = sc.nextLine();
                 CommandOptions commandOptions = CommandOptions.getOptionFromString(decision);
 
                 //To-do: для каждого приема данных проверить InputMismatchException
@@ -58,6 +61,10 @@ public class Main {
                         sc.nextLine();
                         taskHandler.markDone(id);
                     }
+                    case LIST -> taskHandler.listAll();
+                    case LIST_DONE -> taskHandler.listDone();
+                    case LIST_TODO -> taskHandler.listTodo();
+                    case LIST_IN_PROGRESS -> taskHandler.listInProgress();
                     case QUIT -> isRunning = false;
                     case null -> System.out.printf("Unknown command: %s.\n", decision);
                 }

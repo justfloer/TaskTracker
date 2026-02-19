@@ -5,21 +5,17 @@ public enum CommandOptions {
     QUIT("quit"),
 
     MARK_IN_PROGRESS("mark-in-progress"),
-    MARK_DONE("mark-done"),;
+    MARK_DONE("mark-done"),
 
-//    LIST("list"),
-//    LIST_DONE("list done"),
-//    LIST_TODO("list todo"),
-//    LIST_IN_PROGRESS("list in-progress");
+    LIST("list"),
+    LIST_DONE("list done"),
+    LIST_TODO("list todo"),
+    LIST_IN_PROGRESS("list in-progress");
 
     private final String decision;
 
     CommandOptions(String decision) {
         this.decision = decision;
-    }
-
-    public String getDecision() {
-        return decision;
     }
 
     public static CommandOptions getOptionFromString(String input) {
