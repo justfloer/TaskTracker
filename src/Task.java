@@ -8,12 +8,23 @@ public class Task {
     private TaskStatus status;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public Task(String description){
         this.description = description;
         this.status = TaskStatus.TODO;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = createdAt;
+    }
+
+    public Task(int id, String description, TaskStatus status,
+                LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        TaskHandler.setNextId(id + 1);
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     //ID
@@ -28,9 +39,6 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-    public String getDescription() {
-        return this.description;
-    }
 
     //STATUS
     public void setStatus(TaskStatus status) {
@@ -41,11 +49,7 @@ public class Task {
     }
 
     //CREATED AT
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
     public String getFormattedCreatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return createdAt.format(formatter);
     }
 
@@ -53,25 +57,15 @@ public class Task {
     public void setUpdatedAt() {
         this.updatedAt = LocalDateTime.now();
     }
-    public LocalDateTime getUpdatedAt() {
-        return this.updatedAt;
-    }
     public String getFormattedUpdatedAt() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return updatedAt.format(formatter);
     }
 
     //GET TASK INFO
-    public void getTaskInfo() {
-        System.out.printf("ID: %d, Description: " + this.description + "\n", this.id);
-        System.out.println("Status: " + this.status);
-        System.out.println("Created at " + this.getFormattedCreatedAt());
-        System.out.println("Updated at " + this.getFormattedUpdatedAt());
-    }
     public String taskToJson() {
         //To-do: make fancier later
         return String.format(
-                "\t{\n\t  \"id\" : %d,\n\t  \"description\": \"%s\",\n\t  \"status\": \"%s\",\n\t  \"createdAt\": \"%s\",\n\t  \"updatedAt\": \"%s\"\n\t}",
+                "\t{\n\t  \"id\": %d,\n\t  \"description\": \"%s\",\n\t  \"status\": \"%s\",\n\t  \"createdAt\": \"%s\",\n\t  \"updatedAt\": \"%s\"\n\t}",
                 this.id, this.description, this.status, this.getFormattedCreatedAt(), this.getFormattedUpdatedAt()
         );
     }

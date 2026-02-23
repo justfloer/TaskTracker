@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskHandler {
 
-    private List<Task> tasks = new ArrayList<>();
-    private int nextId = 1;
+    private final List<Task> tasks = TaskStorage.readTasksFromJson();
+    private static int nextId = 1;
 
     public void addTask(String description) {
         Task task = new Task(description);
@@ -50,6 +49,7 @@ public class TaskHandler {
 
         if(task != null) {
             task.setStatus(TaskStatus.IN_PROGRESS);
+            task.setUpdatedAt();
 
             TaskStorage.writeTasksToJson(tasks);
             System.out.printf("Successfully marked as in progress task (ID: %d)\n", id);
@@ -65,6 +65,7 @@ public class TaskHandler {
 
         if(task != null) {
             task.setStatus(TaskStatus.DONE);
+            task.setUpdatedAt();
 
             TaskStorage.writeTasksToJson(tasks);
             System.out.printf("Successfully marked done task (ID: %d)\n", id);
@@ -102,6 +103,10 @@ public class TaskHandler {
                 task.printShortTaskInfo();
             }
         }
+    }
+
+    public static void setNextId(int id) {
+        nextId = id;
     }
 
     private Task findById(int id) {

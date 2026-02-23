@@ -1,13 +1,13 @@
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskStorage {
 
-    private static final String FILE_PATH = "E:\\Java stuff\\TaskTracker\\src\\tasks.json";
-
-    //To-do: implement reading from JSON file
+    private static final String FILE_PATH = "src\\tasks.json";
 
     public static void writeTasksToJson(List<Task> tasks) {
 
@@ -30,4 +30,55 @@ public class TaskStorage {
         }
     }
 
+    public static List<Task> readTasksFromJson() {
+
+        List<Task> tasks = new ArrayList<>();
+        if(!Files.exists(Paths.get(FILE_PATH))) return tasks;
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
+
+            int id = 0;
+            String description = "";
+            TaskStatus status = TaskStatus.TODO;
+            LocalDateTime createdAt = null, updatedAt = null;
+
+            for(String line : lines) {
+                line = line.trim();
+
+                if(line.startsWith("\"id\"")) {
+                    id = Integer.parseInt(parseLine(line));
+                }
+                if(line.startsWith("\"description\"")) {
+                    description = parseLine(line);
+                }
+                if(line.startsWith("\"status\"")) {
+                    status = TaskStatus.valueOf(parseLine(line));
+                }
+                if(line.startsWith("\"createdAt\"")) {
+                    createdAt = LocalDateTime.parse(parseLineForDate(line), Task.formatter);
+                }
+                if(line.startsWith("\"updatedAt\"")) {
+                    updatedAt = LocalDateTime.parse(parseLineForDate(line), Task.formatter);
+                    Task task = new Task(id, description, status, createdAt, updatedAt);
+                    tasks.add(task);
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Could not read file.");
+        }
+
+        return tasks;
+    }
+
+    private static String parseLine(String str) {
+        return str.split(":")[1].replace(",", "").replace("\"", "").trim();
+    }
+
+    private static String parseLineForDate(String str) {
+        return str.split(":")[1].replace("\"", "").trim()
+                + ":"
+                + str.split(":")[2].replace(",", "").replace("\"", "");
+    }
 }
