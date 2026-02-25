@@ -41,7 +41,7 @@ public class TaskStorage {
             int id = 0;
             String description = "";
             TaskStatus status = TaskStatus.TODO;
-            LocalDateTime createdAt = null, updatedAt = null;
+            LocalDateTime createdAt = null, updatedAt;
 
             for(String line : lines) {
                 line = line.trim();

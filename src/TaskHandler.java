@@ -81,25 +81,9 @@ public class TaskHandler {
         }
     }
 
-    public void listDone() {
+    public void listByStatus(TaskStatus status) {
         for(Task task : tasks) {
-            if(task.getStatus() == TaskStatus.DONE) {
-                task.printShortTaskInfo();
-            }
-        }
-    }
-
-    public void listTodo() {
-        for(Task task : tasks) {
-            if(task.getStatus() == TaskStatus.TODO) {
-                task.printShortTaskInfo();
-            }
-        }
-    }
-
-    public void listInProgress() {
-        for(Task task : tasks) {
-            if(task.getStatus() == TaskStatus.IN_PROGRESS) {
+            if(task.getStatus() == status) {
                 task.printShortTaskInfo();
             }
         }
