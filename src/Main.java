@@ -5,9 +5,10 @@ public class Main {
     public static void main(String[] args) {
         //To-Do: обработать краевые ситуации при приеме ввода команды(что id - int и тд тп)
         TaskHandler taskHandler = new TaskHandler();
+        String emptyErrorMessage = "Empty command, type <help> for the list of commands";
 
         if(args.length < 1) {
-            System.out.println("Empty command, type <help> for the list of commands");
+            System.out.println(emptyErrorMessage);
             return;
         }
 
@@ -62,7 +63,7 @@ public class Main {
                     System.out.println("list in-progress");
                     System.out.println("help");
                 }
-                case null -> System.out.println("Empty command, type <help> for the list of commands");
+                case null -> System.out.println(emptyErrorMessage);
                 default -> System.out.printf("Unknown command: %s, type <help> for the list of commands\n", command);
             }
         } catch (IllegalArgumentException e) {
