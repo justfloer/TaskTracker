@@ -10,8 +10,12 @@ public class TaskHandler {
         task.setId(nextId++);
         tasks.add(task);
 
-        TaskStorage.writeTasksToJson(tasks);
-        System.out.printf("Task added successfully (ID: %d)\n", task.getId());
+        if(TaskStorage.writeTasksToJson(tasks)) {
+            System.out.printf("Task added successfully (ID: %d)\n", task.getId());
+        } else {
+            System.out.println("Failed to add task.");
+            tasks.remove(task);
+        }
     }
 
     public void updateTask(int id, String description) {

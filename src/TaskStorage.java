@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class TaskStorage {
 
     private static final String FILE_PATH = "src\\tasks.json";
 
-    public static void writeTasksToJson(List<Task> tasks) {
+    public static boolean writeTasksToJson(List<Task> tasks) {
 
         try {
             StringBuilder sb = new StringBuilder();
@@ -24,19 +25,22 @@ public class TaskStorage {
             sb.append("]");
 
             Files.write(Paths.get(FILE_PATH), sb.toString().getBytes());
+            return true;
 
         } catch (IOException e) {
             System.out.println("Could not write file.");
+            return false;
         }
     }
 
     public static List<Task> readTasksFromJson() {
 
+        Path path = Paths.get(FILE_PATH);
         List<Task> tasks = new ArrayList<>();
-        if(!Files.exists(Paths.get(FILE_PATH))) return tasks;
+        if(!Files.exists(path)) return tasks;
 
         try {
-            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
+            List<String> lines = Files.readAllLines(path);
 
             int id = 0;
             String description = "";

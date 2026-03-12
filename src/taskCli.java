@@ -1,11 +1,9 @@
-import java.util.Scanner;
-
-public class Main {
+public class taskCli {
 
     public static void main(String[] args) {
-        //To-Do: обработать краевые ситуации при приеме ввода команды(что id - int и тд тп)
         TaskHandler taskHandler = new TaskHandler();
-        String emptyErrorMessage = "Empty command, type <help> for the list of commands";
+        String emptyErrorMessage = "Empty command, type <commands> for the list of commands";
+        String wrongCommandMessage = "Unknown command, type <commands> for the list of commands";
 
         if(args.length < 1) {
             System.out.println(emptyErrorMessage);
@@ -25,7 +23,6 @@ public class Main {
                     int id = Integer.parseInt(args[1]);
                     String newDescription = args[2];
                     taskHandler.updateTask(id, newDescription);
-
                 }
                 case DELETE -> {
                     int id = Integer.parseInt(args[1]);
@@ -48,10 +45,11 @@ public class Main {
                             case "done" -> taskHandler.listByStatus(TaskStatus.DONE);
                             case "todo" -> taskHandler.listByStatus(TaskStatus.TODO);
                             case "in-progress" -> taskHandler.listByStatus(TaskStatus.IN_PROGRESS);
+                            default -> System.out.println(wrongCommandMessage);
                         }
                     }
                 }
-                case HELP -> {
+                case COMMANDS -> {
                     System.out.println("add <\"description\">");
                     System.out.println("update <id> <\"new description\">");
                     System.out.println("delete <id>");
@@ -61,13 +59,13 @@ public class Main {
                     System.out.println("list done");
                     System.out.println("list todo");
                     System.out.println("list in-progress");
-                    System.out.println("help");
+                    System.out.println("commands");
                 }
                 case null -> System.out.println(emptyErrorMessage);
-                default -> System.out.printf("Unknown command: %s, type <help> for the list of commands\n", command);
+                default -> System.out.printf("Unknown command: %s, type <commands> for the list of commands\n", command);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Unknown command, type <help> for the list of commands");
+            System.out.println(wrongCommandMessage);
         }
 
     }

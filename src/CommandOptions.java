@@ -2,7 +2,7 @@ public enum CommandOptions {
     ADD("add"),
     UPDATE("update"),
     DELETE("delete"),
-    HELP("help"),
+    COMMANDS("commands"),
 
     MARK_IN_PROGRESS("mark-in-progress"),
     MARK_DONE("mark-done"),
