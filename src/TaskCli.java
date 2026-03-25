@@ -1,4 +1,4 @@
-public class taskCli {
+public class TaskCli {
 
     public static void main(String[] args) {
         TaskHandler taskHandler = new TaskHandler();
