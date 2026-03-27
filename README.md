@@ -21,7 +21,7 @@ This is a simple command-line interface (CLI) application for task management. I
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/justfloer/TaskTracker.git
+   git clone https://github.com/justfloer/TaskTracker
    cd TaskTracker/src
 
 2. Make sure you're on the `master` branch
