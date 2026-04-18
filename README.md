@@ -1,6 +1,7 @@
 # Task CLI Application
 
-This is a simple command-line interface (CLI) application for task management. It allows you to add, update, delete, mark, and list tasks directly from the terminal. All tasks are stored in a `.json` file, so you can resume working with the app even after closing and restarting the session.
+This is a simple command-line interface (CLI) application for task management inspired by https://roadmap.sh/projects/task-tracker. 
+It allows you to add, update, delete, mark, and list tasks directly from the terminal. All tasks are stored in a `.json` file, so you can resume working with the app even after closing and restarting the session.
 
 ## Features
 
